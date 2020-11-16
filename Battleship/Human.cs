@@ -39,8 +39,11 @@ namespace Battleship
             Console.WriteLine("Choose an orientation");
             List<string> orientationOptions = new List<string> { "Up", "Down", "Left", "Right" };
             orientationMenu = new ConsoleOptionsInterface(orientationOptions, false, false);
-            int optionSelected = orientationMenu.Launch();
-            ValidPlacement(coords);
+            int optionSelected;
+            do
+            {
+                optionSelected = orientationMenu.Launch();
+            } while (!ValidPlacement(coords, optionSelected, ship));
         }
 
         public List<int> ConvertCoord(string coord)
@@ -54,11 +57,41 @@ namespace Battleship
 
         public bool ValidCoord(List<int> coords)
         {
+            if (battleConsole.ownedBoard[coords[0], coords[1]] != 79)
+            {
+                return false;
+            }
             return true;
         }
 
-        public bool ValidPlacement(List<int> coords)
+        public bool ValidPlacement(List<int> coords, int optionSelected, Ship ship)
         {
+            int increment;
+            List<int> prospectiveCoords = new List<int> { coords[0], coords[1] };
+            if (optionSelected == 1 || optionSelected == 3) { //if 'up' or 'left' selected, i will be decremented
+                increment = -1;
+            }
+            else {//if 'down' or 'right' selected, i will be intcremented
+                increment = 1;
+            }
+            if (optionSelected == 1 || optionSelected == 2) { //if 'up' or 'down', search through different rows at same column.
+                for (int i = coords[0]; i < (coords[0] + ship.length * increment); i += increment)
+                {
+                    prospectiveCoords[0] = i;
+                    if (!ValidCoord(prospectiveCoords)) {
+                        return false;
+                    }
+                }
+            }
+            else  {//if 'left' or 'right', search through different columns at the given row.
+                for (int i = coords[1]; i < (coords[1] + ship.length * increment); i += increment)
+                {
+                    prospectiveCoords[1] = i;
+                    if (!ValidCoord(prospectiveCoords)) {
+                        return false;
+                    }
+                }
+            }
             return true;
         }
 
