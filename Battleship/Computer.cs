@@ -9,11 +9,10 @@ namespace Battleship
     class Computer : Player
     {
 
-        public Computer(BattleConsole battleConsole, List<string> destroyedShips)
+        public Computer(string name, BattleConsole battleConsole)
         {
-            this.name = "Computer";
+            this.name = name;
             this.battleConsole = battleConsole;
-            this.destroyedShips = destroyedShips;
         }
         public override void SelectTargetCoord()
         {
