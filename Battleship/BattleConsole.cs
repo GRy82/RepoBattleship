@@ -17,7 +17,7 @@ namespace Battleship
             this.ownedShips = ownedShips;
         }
 
-        void GenerateEmptyBoards()
+        public void GenerateEmptyBoards()
         {
             //Fill in the top row from index 1-21 with 1-21.
             //Fill in the Left-most column with Ascii values of letters A-T from index 1-21

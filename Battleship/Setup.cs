@@ -24,6 +24,8 @@ namespace Battleship
 
             BattleConsole battleConsoleOne = new BattleConsole(playerOneShips);
             BattleConsole battleConsoleTwo = new BattleConsole(playerTwoShips);
+            battleConsoleOne.GenerateEmptyBoards();
+            battleConsoleTwo.GenerateEmptyBoards();
             List<BattleConsole> battleConsolesList = new List<BattleConsole> { battleConsoleOne, battleConsoleTwo };
 
             List<Player> playersList = LoadPlayers(optionSelected, battleConsolesList);
