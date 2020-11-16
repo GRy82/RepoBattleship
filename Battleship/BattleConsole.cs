@@ -8,7 +8,13 @@ namespace Battleship
 {
     class BattleConsole
     {
-
+        public int[,] ownedBoard = new int[20, 20];
+        public int[,] opponentBoard = new int[20, 20];
+        List<Ship> ownedShips;
+        public BattleConsole()
+        {
+            
+        }
 
     }
 }

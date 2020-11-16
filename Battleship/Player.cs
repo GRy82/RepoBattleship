@@ -11,10 +11,8 @@ namespace Battleship
         
         public string name;
         public BattleConsole battleConsole;
-        public List<Ship> ownedShips;//This could maybe go in the BattleConsole class and be conceived via the above declaration.
         public List<string> destroyedShips;
-        public int[,] ownedBoard = new int[20, 20];
-        public int[,] opponentBoard = new int[20, 20];
+        
 
         public Player()
         {

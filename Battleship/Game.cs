@@ -8,6 +8,13 @@ namespace Battleship
 {
     class Game
     {
+        Player playerOne;
+        Player playerTwo;
+
+        public void Run()
+        {
+
+        }
 
     }
 }
