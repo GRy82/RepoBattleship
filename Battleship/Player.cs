@@ -21,6 +21,8 @@ namespace Battleship
 
         public abstract void OptionsMenu();
         public abstract void SelectTargetCoord();
+
+        public abstract void SetBoard();
        
     }
 }

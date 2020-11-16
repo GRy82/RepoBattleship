@@ -17,6 +17,14 @@ namespace Battleship
          
         }
 
+
+        public override void SetBoard()
+        {
+            foreach (Ship ship in battleConsole.ownedShips)
+            {
+
+            }
+        }
         public override void OptionsMenu()
         {
             List<string> turnOptions = new List<string> { "View Your Board", "View Opponent's Board", "Fire a Missile" };
@@ -24,6 +32,7 @@ namespace Battleship
             int optionSelected = turnMenu.Launch();
             
         }
+
         public override void SelectTargetCoord()
         {
             

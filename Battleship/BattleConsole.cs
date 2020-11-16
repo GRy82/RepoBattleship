@@ -11,7 +11,7 @@ namespace Battleship
         char emptySpace = 'O'; //This is a ascii code 79
         public int[,] ownedBoard = new int[21, 21];
         public int[,] opponentBoard = new int[21, 21];
-        List<Ship> ownedShips;
+        public List<Ship> ownedShips;
         public BattleConsole(List<Ship> ownedShips)
         {
             this.ownedShips = ownedShips;

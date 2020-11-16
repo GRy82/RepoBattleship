@@ -30,6 +30,8 @@ namespace Battleship
                 playersList = setup.LoadObjects(optionSelected);
                 playerOne = playersList[0];
                 playerTwo = playersList[1];
+                playerOne.SetBoard();
+                playerTwo.SetBoard();
                 TurnCycle();
 
             }

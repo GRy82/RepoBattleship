@@ -15,6 +15,10 @@ namespace Battleship
             this.battleConsole = battleConsole;
         }
 
+        public override void SetBoard()
+        {
+            
+        }
         public override void OptionsMenu()
         {
             
