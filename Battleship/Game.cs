@@ -10,21 +10,45 @@ namespace Battleship
     class Game
     {
         List<Player> playersList;
+        Player playerOne;
+        Player playerTwo;
 
         public void Run()
         {
             List<string> startOptions = new List<string> {"Play single player", "Play multiplayer", "Spectator Mode(Comp vs Comp)"};
-            ConsoleOptionsInterface startMenu = new ConsoleOptionsInterface(startOptions, true, false);
-            Setup setup = new Setup;
+            ConsoleOptionsInterface startMenu = new ConsoleOptionsInterface(startOptions, true, false);      
+            Setup setup = new Setup();
             bool runGame = true;
             while(runGame == true)
             {
                 int optionSelected = startMenu.Launch();//If optionSelected == 4, program automatically terminated.
                 playersList = setup.LoadObjects(optionSelected);
+                playerOne = playersList[0];
+                playerTwo = playersList[1];
+                TurnCycle();
+
             }
 
         }
 
+        public void TurnCycle()
+        {
+            string thisTurn = playerOne.name;
+            string lastTurn = playerTwo.name;
+            do
+            {
+                if (lastTurn == playerOne.name) {
+                    thisTurn = playerTwo.name;
+                    playerTwo.OptionsMenu();
+                    lastTurn = playerTwo.name;
+                }
+                else {
+                    thisTurn = playerOne.name;
+                    playerOne.OptionsMenu();
+                    lastTurn = playerTwo.name;
+                }
+            } while (playerOne.destroyedShips.Count < 4 && playerTwo.destroyedShips.Count < 4);
+        }
         
     }
 }

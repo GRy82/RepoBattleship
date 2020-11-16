@@ -15,6 +15,10 @@ namespace Battleship
          
     }
 
+        public override int OptionsMenu()
+        {
+
+        }
         public override void SelectTargetCoord()
         {
             
