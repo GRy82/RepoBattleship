@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Human : Player
+    class Computer : Player
     {
-        public Human(string name, BattleConsole battleConsole)
-        {
-            this.name = name;
-            this.battleConsole = battleConsole;
-         
-    }
 
+        public Computer(BattleConsole battleConsole, List<string> destroyedShips)
+        {
+            this.name = "Computer";
+            this.battleConsole = battleConsole;
+            this.destroyedShips = destroyedShips;
+        }
         public override void SelectTargetCoord()
         {
-            
-        }
 
+        }
     }
 }

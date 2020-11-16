@@ -14,7 +14,7 @@ namespace Battleship
         public string edgeTwo;
         public char symbolOne;
         public char symbolTwo;
-    public Ship()
+    public Ship(string name, int length)
         {
 
         }

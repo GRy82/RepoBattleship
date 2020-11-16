@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BattleConsole.cs" />
+    <Compile Include="Computer.cs" />
     <Compile Include="ConsoleOptionsInterface.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Human.cs" />

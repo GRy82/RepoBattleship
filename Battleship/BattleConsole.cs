@@ -11,9 +11,9 @@ namespace Battleship
         public int[,] ownedBoard = new int[20, 20];
         public int[,] opponentBoard = new int[20, 20];
         List<Ship> ownedShips;
-        public BattleConsole()
+        public BattleConsole(List<Ship> ownedShips)
         {
-            
+            this.ownedShips = ownedShips;
         }
 
     }
