@@ -19,7 +19,7 @@ namespace Battleship
 
         }
 
-        public List<int> ConvertStringToCoord()
+        public void ConvertStringToCoord() //Will return list of coords.
         {
 
         }

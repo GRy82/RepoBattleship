@@ -14,6 +14,11 @@ namespace Battleship
             this.name = name;
             this.battleConsole = battleConsole;
         }
+
+        public override void OptionsMenu()
+        {
+            
+        }
         public override void SelectTargetCoord()
         {
 

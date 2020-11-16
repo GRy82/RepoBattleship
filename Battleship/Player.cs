@@ -19,7 +19,7 @@ namespace Battleship
 
         }
 
-        public abstract int OptionsMenu();
+        public abstract void OptionsMenu();
         public abstract void SelectTargetCoord();
        
     }

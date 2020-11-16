@@ -13,6 +13,11 @@ namespace Battleship
         Player playerOne;
         Player playerTwo;
 
+        public Game()
+        {
+
+        }
+
         public void Run()
         {
             List<string> startOptions = new List<string> {"Play single player", "Play multiplayer", "Spectator Mode(Comp vs Comp)"};
