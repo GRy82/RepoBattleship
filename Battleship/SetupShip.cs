@@ -25,7 +25,7 @@ namespace Battleship
             Console.WriteLine("Choose a space for one end of your " + ship.name + " of size " + ship.length + ". (eg. B:13)");
             Coordinates coords = GetStartingCoordinate(human);
             Console.WriteLine("Choose an orientation");
-            int orientationSelection = GetOrientation(coords, ship, human);
+            int orientationSelection = GetOrientation(coords, human);
             AssignAnchorPointsToShip(orientationSelection, coords);
         }
 
@@ -34,6 +34,7 @@ namespace Battleship
             ship = currentShip;
             Coordinates startingCoords = GetStartingCoordinate(computer);
             int orientation = GetOrientation(startingCoords, computer);
+            AssignAnchorPointsToShip(orientation, startingCoords);
         }
 
 
@@ -41,15 +42,17 @@ namespace Battleship
         {
             ship.edgeOne.Row = startingCoordinates.Row;
             ship.edgeOne.Column = startingCoordinates.Column;
+            battleConsole.ownedBoard[(int)ship.edgeOne.Row - 64, ship.edgeOne.Column + 1] = 35;
             int increment = SetIncrement(orientation);// orientation is a number 1-4, representing { "Up", "Down", "Left", "Right" };   
             for (int i = (int)ship.edgeOne.Row, j = ship.edgeOne.Column; i < (int)ship.edgeTwo.Row && j < ship.edgeTwo.Column; i+=increment, j+= increment)
             {
-                if (orientation == 1 || orientation == 2) {//Vertically aligned
-                    
+                if (orientation == 1 || orientation == 2) {//Vertically aligned  
                     ship.coordsList.Add(new Coordinates(Convert.ToChar(i), ship.edgeOne.Column));
+                    battleConsole.ownedBoard[i - 64, ship.edgeOne.Column] = 35;
                 }
                 else {//Horizontally aligned.
                     ship.coordsList.Add(new Coordinates(ship.edgeOne.Row, j));
+                    battleConsole.ownedBoard[(int)ship.edgeOne.Row - 64, j + 1] = 35;
                 }
             }
         }
@@ -79,7 +82,7 @@ namespace Battleship
             return Coordinates.ConvertCoord(stringCoord);
         }
 
-        int GetOrientation(Coordinates coords, Ship ship, Human human)
+        int GetOrientation(Coordinates coords, Human human)
         {
             List<string> orientationOptions = new List<string> { "Up", "Down", "Left", "Right" };
             orientationMenu = new ConsoleOptionsInterface(orientationOptions, false, false);
@@ -94,7 +97,13 @@ namespace Battleship
 
         int GetOrientation(Coordinates coords, Computer computer)
         {
+            int randomDirection;
+            do
+            {
+                randomDirection = RandNumGen.GenerateRand(1, 5);
 
+            } while (!CheckFit(coords, randomDirection) || !CheckInterference(coords, randomDirection, ship));
+            return randomDirection;
         }
 
 
@@ -115,7 +124,7 @@ namespace Battleship
 
         bool CheckInterference(Coordinates startingCoords, int optionSelected, Ship ship)
         {
-            List<int> numericalCoords = new List<int> { (startingCoords.Row - 65 + 1), startingCoords.Column }; //-65 to align with numbers, + 1 to set it to second row(1st row is a table header)
+            List<int> numericalCoords = new List<int> { (startingCoords.Row - 65 + 1), startingCoords.Column + 1 }; //-65 to align with numbers, + 1 to set it to second row(1st row is a table header)
             List<int> prospectiveCoords = numericalCoords;
             int increment = SetIncrement(optionSelected);
             if (optionSelected == 1 || optionSelected == 2)
