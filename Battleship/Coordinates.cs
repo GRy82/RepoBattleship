@@ -67,5 +67,15 @@ namespace Battleship
             Coordinates coords = new Coordinates(Convert.ToChar(numericalCoords[0]), numericalCoords[1]);
             return coords;
         }
+
+        public static bool CheckCoord(BattleConsole battleConsole, Coordinates coords) //returns true if empty, false if filled.
+        {
+            if (battleConsole.ownedBoard[coords.Row, coords.Column] != 79)
+            {
+                Console.WriteLine("\nShip cannot be placed there.");
+                return false;
+            }
+            return true;
+        }
     }
 }

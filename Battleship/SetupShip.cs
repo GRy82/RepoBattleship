@@ -23,13 +23,14 @@ namespace Battleship
             Console.WriteLine("Choose a space for one end of your " + ship.name + " of size " + ship.length + ". (eg. B:13)");
             Coordinates coords = GetStartingCoordinate(human);
             Console.WriteLine("Choose an orientation");
-            int orientationSelection = GetOrientation(coords, ship);
+            int orientationSelection = GetOrientation(coords, ship, human);
             AssignAnchorPointsToShip(ship, orientationSelection, coords);
         }
 
         public void SetShip(Ship ship, Computer computer)
         {
             Coordinates startingCoords = GetStartingCoordinate(computer);
+            int orientation = GetOrientation(startingCoords, ship, computer);
         }
 
 
@@ -59,7 +60,7 @@ namespace Battleship
                     userInput = Console.ReadLine();
                 } while (!Coordinates.ValidCoord(userInput));
                 coords = Coordinates.ConvertCoord(userInput);
-            } while (!AvailableCoord(coords));
+            } while (!Coordinates.CheckCoord(human.battleConsole, coords));
             return coords;   
         }
 
@@ -75,7 +76,7 @@ namespace Battleship
             return Coordinates.ConvertCoord(stringCoord);
         }
 
-        int GetOrientation(Coordinates coords, Ship ship)
+        int GetOrientation(Coordinates coords, Ship ship, Human human)
         {
             List<string> orientationOptions = new List<string> { "Up", "Down", "Left", "Right" };
             orientationMenu = new ConsoleOptionsInterface(orientationOptions, false, false);
@@ -83,21 +84,17 @@ namespace Battleship
             do
             {
                 optionSelected = orientationMenu.Launch();
-            } while (!ValidPlacement(coords, optionSelected, ship));
+            } while (!ValidPlacement(coords, optionSelected, ship, human));
 
             return optionSelected;
         }
 
-
-        bool AvailableCoord(Coordinates coords)
+        int GetOrientation(Coordinates coords, Ship ship, Computer computer)
         {
-            if (battleConsole.ownedBoard[coords.Row, coords.Column] != 79)
-            {
-                Console.WriteLine("\nShip cannot be placed there.");
-                return false;
-            }
-            return true;
+            
         }
+
+
 
         int SetIncrement(int optionSelected)
         {
@@ -113,7 +110,7 @@ namespace Battleship
             return increment;
         }
 
-        bool ValidPlacement(Coordinates coords, int optionSelected, Ship ship)
+        bool ValidPlacement(Coordinates coords, int optionSelected, Ship ship, Player player)
         {
             List<int> numericalCoords = new List<int> { (coords.Row - 65 + 1), coords.Column }; //-65 to align with numbers, + 1 to set it to second row(1st row is a table header)
             List<int> prospectiveCoords = numericalCoords;
@@ -123,7 +120,7 @@ namespace Battleship
                 for (int i = numericalCoords[0]; i < (numericalCoords[0] + ship.length * increment); i += increment)
                 {
                     prospectiveCoords[0] = i;
-                    if (!AvailableCoord(Coordinates.ConvertCoord(prospectiveCoords)))
+                    if (!Coordinates.CheckCoord(player.battleConsole, Coordinates.ConvertCoord(prospectiveCoords)))
                     {
                         return false;
                     }
@@ -134,7 +131,7 @@ namespace Battleship
                 for (int i = numericalCoords[1]; i < (numericalCoords[1] + ship.length * increment); i += increment)
                 {
                     prospectiveCoords[1] = i;
-                    if (!AvailableCoord(Coordinates.ConvertCoord(prospectiveCoords)))
+                    if (!Coordinates.CheckCoord(player.battleConsole, Coordinates.ConvertCoord(prospectiveCoords)))
                     {
                         return false;
                     }
