@@ -25,7 +25,7 @@ namespace Battleship
 
         }
 
-        private List<Player> LoadPlayers(int optionSelected, List<BattleConsole> battleConsolesList)
+        private static List<Player> LoadPlayers(int optionSelected, List<BattleConsole> battleConsolesList)
         {
             Player playerOne;
             Player playerTwo;
@@ -57,10 +57,10 @@ namespace Battleship
             return playersList;
         }
 
-        string ChooseName(int playerNumber)
+        private static string ChooseName(int playerNumber)
         {
             string nameInput;
-            Console.Write("Please enter your name, player" + playerNumber + ": ");
+            Console.Write("\nPlease enter your name, player" + playerNumber + ": ");
             do
             {
                 nameInput = Console.ReadLine();
@@ -69,7 +69,7 @@ namespace Battleship
         }
 
 
-        bool ValidateName(string nameInput)
+        private static bool ValidateName(string nameInput)
         {
             if (nameInput.Length < 1 || nameInput.Length > 20)
             {

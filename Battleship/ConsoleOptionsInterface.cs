@@ -25,7 +25,7 @@ namespace ProblemSolving1
         }
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
-        public void SetExitOption()
+        void SetExitOption()
         {
             if (this.includeExitOption)
             {
@@ -125,6 +125,7 @@ namespace ProblemSolving1
         //-------------------------------------------------------------------------------------
         string ProtectedTyping()
         {
+            //Help from:
             //https://stackoverflow.com/questions/3404421/password-masking-console-application
             ConsoleKey keyPressed;
             string optionInput = "";
@@ -137,7 +138,14 @@ namespace ProblemSolving1
                 {
                     Console.Write("\b \b");
                     int lastIndex = optionInput.Length - 1;
-                    optionInput.Remove(lastIndex, 1);
+                    if (optionInput.Length == 1)
+                    {
+                        optionInput = "";
+                    }
+                    else
+                    {
+                        optionInput.Remove(lastIndex, 1);
+                    }
                 }
                 else if (!char.IsControl(keyIntercepted.KeyChar))
                 {
@@ -145,6 +153,8 @@ namespace ProblemSolving1
                     optionInput += keyIntercepted.KeyChar;//intercept is a boolean that selects for non-display.
                 }
             } while (keyPressed != ConsoleKey.Enter);
+
+            Console.WriteLine();//skip a line
 
             return optionInput;
         }
