@@ -10,10 +10,6 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
-            string poop = "poop::poop";
-            string[] listofStrings = poop.Split(':');
-            Console.WriteLine(listofStrings[1]);
-            Console.ReadLine();
             Game battleship = new Game();
             battleship.Run();
         }
