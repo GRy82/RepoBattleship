@@ -18,20 +18,26 @@ namespace Battleship
         }
 
         ConsoleOptionsInterface orientationMenu;
-        public void SetShip(Ship ship)
+        public void SetShip(Ship ship, Human human)
         {
             Console.WriteLine("Choose a space for one end of your " + ship.name + " of size " + ship.length + ". (eg. B:13)");
-            Coordinates coords = GetStartingCoordinate();
+            Coordinates coords = GetStartingCoordinate(human);
             Console.WriteLine("Choose an orientation");
             int orientationSelection = GetOrientation(coords, ship);
             AssignAnchorPointsToShip(ship, orientationSelection, coords);
         }
 
+        public void SetShip(Ship ship, Computer computer)
+        {
+            Coordinates startingCoords = GetStartingCoordinate(computer);
+        }
+
+
         void AssignAnchorPointsToShip(Ship ship, int orientation, Coordinates startingCoordinates)
         {
             ship.edgeOne.Row = startingCoordinates.Row;
             ship.edgeOne.Column = startingCoordinates.Column;
-            int increment = SetIncrement(orientation);//1-4 { "Up", "Down", "Left", "Right" };   
+            int increment = SetIncrement(orientation);// orientation is a number 1-4, representing { "Up", "Down", "Left", "Right" };   
             for (int i = (int)ship.edgeOne.Row, j = ship.edgeOne.Column; i < (int)ship.edgeTwo.Row && j < ship.edgeTwo.Column; i+=increment, j+= increment)
             {
                 if (orientation == 1 || orientation == 2) {//Vertically aligned
@@ -44,7 +50,7 @@ namespace Battleship
             }
         }
 
-        Coordinates GetStartingCoordinate()
+        Coordinates GetStartingCoordinate(Human human)
         {
             Coordinates coords;
             string userInput;
@@ -55,6 +61,18 @@ namespace Battleship
                 coords = Coordinates.ConvertCoord(userInput);
             } while (!AvailableCoord(coords));
             return coords;   
+        }
+
+        Coordinates GetStartingCoordinate(Computer computer)
+        {
+            string stringCoord;
+            do
+            {
+                int numericRow = RandNumGen.GenerateRand(1, 21);
+                int numericColumn = RandNumGen.GenerateRand(1, 21);
+                stringCoord = Convert.ToChar(numericRow + 64) + ":" + numericColumn;
+            } while (!Coordinates.ValidCoord(stringCoord));
+            return Coordinates.ConvertCoord(stringCoord);
         }
 
         int GetOrientation(Coordinates coords, Ship ship)

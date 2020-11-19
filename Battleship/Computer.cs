@@ -17,7 +17,12 @@ namespace Battleship
 
         public override void SetBoard()
         {
-            
+            SetupShip setupShip = new SetupShip(battleConsole);
+            foreach (Ship ship in battleConsole.ownedShips)
+            {
+                setupShip.SetShip(ship, this);
+            }
+            Console.WriteLine(name + "'s ships have been placed on their board");
         }
         public override void OptionsMenu()
         {

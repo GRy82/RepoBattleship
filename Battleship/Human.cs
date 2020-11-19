@@ -25,7 +25,7 @@ namespace Battleship
             foreach (Ship ship in battleConsole.ownedShips)
             {
                 DisplayOwnBoard();
-                setupShip.SetShip(ship);
+                setupShip.SetShip(ship, this);
             }
         }
 
