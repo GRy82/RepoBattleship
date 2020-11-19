@@ -32,9 +32,7 @@ namespace Battleship
                 playerOne.SetBoard();
                 playerTwo.SetBoard();
                 TurnCycle();
-
             }
-
         }
 
         public void TurnCycle()

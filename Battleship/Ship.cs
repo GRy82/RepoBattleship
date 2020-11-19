@@ -12,6 +12,7 @@ namespace Battleship
         public int length;
         public Coordinates edgeOne;
         public Coordinates edgeTwo;
+        public List<Coordinates> coordsList;
         public char symbolOne;
         public char symbolTwo;
         public Ship(string name, int length)

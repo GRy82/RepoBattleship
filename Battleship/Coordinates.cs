@@ -11,11 +11,16 @@ namespace Battleship
         private char row;
         private int column;
 
-        public char Row { get { return row } set { row = value; } }
-        public int Column { get { return column } set { column = value; } }
+        public char Row { get { return row; } set { row = value; } }
+        public int Column { get { return column; } set { column = value; } }
 
+        public Coordinates(char row, int column)
+        {
+            this.row = row;
+            this.column = column;
+        }
 
-        public bool ValidCoord(string userInput)
+        public static bool ValidCoord(string userInput)
         {
             int colonCounter = 0;
             foreach (char character in userInput)
@@ -50,20 +55,16 @@ namespace Battleship
             return true;
         }
 
-        public Coordinates ConvertCoord(string coord)
+        public static Coordinates ConvertCoord(string coord)
         {
-            Coordinates coords = new Coordinates();
             string[] splitString = coord.Split(':');
-            coords.Column = int.Parse(splitString[1]);
-            coords.Row = Convert.ToChar(splitString[0]);
+            Coordinates coords = new Coordinates(Convert.ToChar(splitString[0]), int.Parse(splitString[1]));
             return coords;
         }
 
-        public Coordinates ConvertCoord(List<int> numericalCoords)
+        public static Coordinates ConvertCoord(List<int> numericalCoords)
         {
-            Coordinates coords = new Coordinates();
-            coords.Column = numericalCoords[1];
-            coords.Row = Convert.ToChar(numericalCoords[0]);
+            Coordinates coords = new Coordinates(Convert.ToChar(numericalCoords[0]), numericalCoords[1]);
             return coords;
         }
     }
