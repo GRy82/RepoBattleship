@@ -20,42 +20,45 @@ namespace Battleship
             this.column = column;
         }
 
-        public static bool ValidCoord(string userInput)
+        public static bool ValidCoord(string userInput)//Just validates input, not coordinates themselves.
         {
             int colonCounter = 0;
-            foreach (char character in userInput)
+            foreach (char character in userInput)//count ':' in string
             {
                 if (character == 58)
                 {
                     colonCounter++;
                 }
             }
-            if (colonCounter != 1)
+            if (colonCounter != 1)//must have 1 colon.
             {
                 return false;
             }
             string[] coordPieces = userInput.Split(':');
-            if (coordPieces[0].Length != 1 && (coordPieces[1].Length < 1 || coordPieces[1].Length > 2))
+            if (coordPieces[0].Length != 1 || coordPieces[1].Length < 1 || coordPieces[1].Length > 2)//must be 1 letter of 1-2-digit#
             {
                 return false;
             }
             coordPieces[0] = coordPieces[0].ToUpper();
             char coordPieceChar = Convert.ToChar(coordPieces[0]);
-            if (coordPieceChar > 90 || coordPieceChar < 65)
+            if (coordPieceChar > 84 || coordPieceChar < 65) //Must be letter A-T
             {
                 return false;
             }
             foreach (char character in coordPieces[1])
             {
-                if (character < 48 || character > 57)
+                if (character < 48 || character > 57)//Must be number
                 {
                     return false;
                 }
             }
+            if (int.Parse(coordPieces[1]) > 20) {//Must be number <= 20
+                return false;
+            }
             return true;
         }
 
-        public static Coordinates ConvertCoord(string coord)
+        public static Coordinates ConvertCoord(string coord)//Converts string input to char and int as the input stated in the string
         {
             string[] splitString = coord.Split(':');
             Coordinates coords = new Coordinates(Convert.ToChar(splitString[0]), int.Parse(splitString[1]));
@@ -70,7 +73,7 @@ namespace Battleship
 
         public static bool CheckCoord(BattleConsole battleConsole, Coordinates coords) //returns true if empty, false if filled.
         {
-            if (battleConsole.ownedBoard[coords.Row, coords.Column] != 79)
+            if (battleConsole.ownedBoard[((int)coords.Row) + 1, coords.Column + 1] != 79)
             {
                 Console.WriteLine("\nShip cannot be placed there.");
                 return false;

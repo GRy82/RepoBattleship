@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class BattleConsole
+    public class BattleConsole
     {
-        char emptySpace = 'O'; //This is a ascii code 79
+        public char emptySpace = 'O'; //This is a ascii code 79
         public int[,] ownedBoard = new int[21, 21];
         public int[,] opponentBoard = new int[21, 21];
         public List<Ship> ownedShips;
