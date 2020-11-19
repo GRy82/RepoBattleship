@@ -10,19 +10,17 @@ namespace Battleship
     {
         public string name;
         public int length;
-        public string edgeOne;
-        public string edgeTwo;
+        public Coordinates edgeOne;
+        public Coordinates edgeTwo;
         public char symbolOne;
         public char symbolTwo;
-    public Ship(string name, int length)
+        public Ship(string name, int length)
         {
-
+            this.name = name;
+            this.length = length;
         }
 
-        public void ConvertStringToCoord() //Will return list of coords.
-        {
-
-        }
+        
     
     }
 }
