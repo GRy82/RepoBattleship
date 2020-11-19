@@ -22,12 +22,11 @@ namespace Battleship
         {
             List<string> startOptions = new List<string> {"Play single player", "Play multiplayer", "Spectator Mode(Comp vs Comp)"};
             ConsoleOptionsInterface startMenu = new ConsoleOptionsInterface(startOptions, true, false);      
-            Setup setup = new Setup();
             bool runGame = true;
             while(runGame == true)
             {
                 int optionSelected = startMenu.Launch();//If optionSelected == 4, program automatically terminated.
-                playersList = setup.LoadObjects(optionSelected);
+                playersList = Setup.LoadObjects(optionSelected);
                 playerOne = playersList[0];
                 playerTwo = playersList[1];
                 playerOne.SetBoard();

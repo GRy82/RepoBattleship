@@ -6,21 +6,13 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Setup
+    static class Setup
     {
-        public List<Player> LoadObjects(int optionSelected)
+        public static List<Player> LoadObjects(int optionSelected)
         {
-            Ship destroyerOne = new Ship("Destroyer", 2);
-            Ship submarineOne = new Ship("Submarine", 3);
-            Ship battleshipOne = new Ship("Battleship", 4);
-            Ship aircraftCarrierOne = new Ship("Aircraft Carrier", 5);
-            List<Ship> playerOneShips = new List<Ship> { destroyerOne, submarineOne, battleshipOne, aircraftCarrierOne };
+            List<Ship> playerOneShips = new List<Ship> { new Ship("Destroyer", 2), new Ship("Submarine", 3), new Ship("Battleship", 4), new Ship("Aircraft Carrier", 5) };
 
-            Ship destroyerTwo = new Ship("Destroyer", 2);
-            Ship submarineTwo = new Ship("Submarine", 3);
-            Ship battleshipTwo = new Ship("Battleship", 4);
-            Ship aircraftCarrierTwo = new Ship("Aircraft Carrier", 5);
-            List<Ship> playerTwoShips = new List<Ship> { destroyerTwo, submarineTwo, battleshipTwo, aircraftCarrierTwo };
+            List<Ship> playerTwoShips = new List<Ship> { new Ship("Destroyer", 2), new Ship("Submarine", 3), new Ship("Battleship", 4), new Ship("Aircraft Carrier", 5) };
 
             BattleConsole battleConsoleOne = new BattleConsole(playerOneShips);
             BattleConsole battleConsoleTwo = new BattleConsole(playerTwoShips);
@@ -33,7 +25,7 @@ namespace Battleship
 
         }
 
-        public List<Player> LoadPlayers(int optionSelected, List<BattleConsole> battleConsolesList)
+        private List<Player> LoadPlayers(int optionSelected, List<BattleConsole> battleConsolesList)
         {
             Player playerOne;
             Player playerTwo;
