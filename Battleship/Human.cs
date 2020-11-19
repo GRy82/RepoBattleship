@@ -21,15 +21,51 @@ namespace Battleship
 
         public override void SetBoard()
         {
-            SetupShip setupShip = new SetupShip(battleConsole);
             foreach (Ship ship in battleConsole.ownedShips)
             {
                 DisplayOwnBoard();
-                setupShip.SetShip(ship, this);
+                SetShip(ship);
             }
         }
 
-        
+        public void SetShip(Ship ship)
+        {
+            Console.WriteLine("Choose a space for one end of your " + ship.name + " of size " + ship.length + ". (eg. B:13)");
+            Coordinates coords = GetStartingCoordinate();
+            Console.WriteLine("Choose an orientation");
+            int orientationSelection = GetOrientation(coords, ship);
+            AssignAnchorPointsToShip(orientationSelection, coords, ship);
+        }
+
+        public override Coordinates GetStartingCoordinate()
+        {
+            Coordinates coords;
+            string userInput;
+            do
+            {
+                do
+                {
+                    userInput = Console.ReadLine();
+                } while (!Coordinates.ValidCoord(userInput));
+                coords = Coordinates.ConvertCoord(userInput);
+            } while (!Coordinates.CheckCoord(battleConsole, coords));
+            return coords;
+        }
+
+        public override int GetOrientation(Coordinates coords, Ship ship)
+        {
+            List<string> orientationOptions = new List<string> { "Up", "Down", "Left", "Right" };
+            ConsoleOptionsInterface orientationMenu = new ConsoleOptionsInterface(orientationOptions, false, false);
+            int optionSelected;
+            do
+            {
+                optionSelected = orientationMenu.Launch();
+            } while (!CheckFit(coords, optionSelected, ship) || !CheckInterference(coords, optionSelected, ship));
+
+            return optionSelected;
+        }
+
+
 
 
         public override void OptionsMenu()
