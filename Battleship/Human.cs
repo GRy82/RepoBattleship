@@ -83,7 +83,14 @@ namespace Battleship
 
         public void DisplayOwnBoard()
         {
-
+            for (int i = 0; i < 21; i++)
+            {
+                for (int j = 0; j < 21; j++)
+                {
+                    Console.Write(Convert.ToChar(battleConsole.ownedBoard[i, j]) + " ");
+                }
+                Console.WriteLine();
+            }
         }
 
         public void DisplayOpponentBoard()

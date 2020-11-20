@@ -19,6 +19,9 @@ namespace Battleship
         {
             this.name = name;
             this.length = length;
+            this.edgeOne = new Coordinates('\0', 0);
+            this.edgeTwo = new Coordinates('\0', 0);
+            this.coordsList = new List<Coordinates> { };
         }
 
         

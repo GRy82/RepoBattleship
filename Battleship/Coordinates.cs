@@ -73,7 +73,7 @@ namespace Battleship
 
         public static bool CheckCoord(BattleConsole battleConsole, Coordinates coords) //returns true if empty, false if filled.
         {
-            if (battleConsole.ownedBoard[((int)coords.Row) + 1, coords.Column + 1] != 79)
+            if (battleConsole.ownedBoard[((int)coords.Row) - 64, coords.Column] != 79)
             {
                 Console.WriteLine("\nShip cannot be placed there.");
                 return false;

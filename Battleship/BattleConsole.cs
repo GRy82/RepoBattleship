@@ -21,16 +21,16 @@ namespace Battleship
         {
             //Fill in the top row from index 1-21 with 1-21.
             //Fill in the Left-most column with Ascii values of letters A-T from index 1-21
-            for (int i = 1; i < 22; i++){
-                ownedBoard[0, i] = i; 
-                opponentBoard[0, i] = i;
+            for (int i = 1; i < 21; i++){
+                ownedBoard[0, i] = i + 48; 
+                opponentBoard[0, i] = i + 48;
                 ownedBoard[i, 0] = i + 64;
                 opponentBoard[i, 0] = i + 64;
             }
             //fill in all other 
-            for (int j = 1; j < 22; j++)
+            for (int j = 1; j < 21; j++)
             {
-                for (int k = 1; k < 22; k++)
+                for (int k = 1; k < 21; k++)
                 {
                     ownedBoard[j, k] = 79;
                     opponentBoard[j, k] = 79;
