@@ -18,7 +18,6 @@ namespace Battleship
          
         }
 
-
         public override void SetBoard()
         {
             foreach (Ship ship in battleConsole.ownedShips)
@@ -76,10 +75,6 @@ namespace Battleship
             
         }
 
-        public override void SelectTargetCoord()
-        {
-            
-        }
 
         public void DisplayOwnBoard()
         {
@@ -91,6 +86,11 @@ namespace Battleship
                 }
                 Console.WriteLine();
             }
+        }
+
+        public override void SelectTargetCoord()
+        {
+
         }
 
         public void DisplayOpponentBoard()
