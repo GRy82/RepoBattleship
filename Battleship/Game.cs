@@ -43,12 +43,12 @@ namespace Battleship
             {
                 if (lastTurn == playerOne.name) {
                     thisTurn = playerTwo.name;
-                    playerTwo.OptionsMenu();
+                    //playerTwo.OptionsMenu();
                     lastTurn = playerTwo.name;
                 }
                 else {
                     thisTurn = playerOne.name;
-                    playerOne.OptionsMenu();
+                    //playerOne.OptionsMenu();
                     lastTurn = playerTwo.name;
                 }
             } while (playerOne.destroyedShips.Count < 4 && playerTwo.destroyedShips.Count < 4);

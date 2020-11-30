@@ -16,6 +16,11 @@ namespace Battleship
         }
 
 
+        public override void SetBoard()
+        {
+            base.SetBoard();
+        }
+
         public override int[] GetFirstCoord(string name, int shipLength)
         {
             int rowIndex;
@@ -27,6 +32,7 @@ namespace Battleship
             } while (!FirstCoordinateValidation(rowIndex, columnIndex, shipLength));
 
             int[] firstCoordinates = new int[2] { rowIndex, columnIndex };
+            return firstCoordinates;
         }
 
         public override int GetCorrespondingOrientationNum(int[] firstCoordinate)

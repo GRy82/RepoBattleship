@@ -28,7 +28,7 @@ namespace Battleship
             {
                 for (int j = 0; j < 20; j++)//column.
                 {
-                    board[i, j] = 79;
+                    board[i, j] = 0;
                 }
             }
             return board;

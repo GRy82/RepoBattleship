@@ -22,7 +22,7 @@ namespace Battleship
 
         //--------------------------Board Setting Methods------------------------//
         //-----------------------------------------------------------------------//
-        public void SetBoard()
+        public virtual void SetBoard()
         {
             foreach (Ship ship in battleConsole.ownedShips)
             {

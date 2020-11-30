@@ -18,6 +18,17 @@ namespace Battleship
          
         }
 
+        public override void SetBoard()
+        {
+            foreach (Ship ship in battleConsole.ownedShips)
+            {
+                DisplayBoard.DisplaySingleBoard(battleConsole.ownedBoard);
+                int[] firstCoordinate = GetFirstCoord(ship.name, ship.length);
+                int orientation = GetOrientation(firstCoordinate, ship.length); //1 is up, 2 is down, 3 is left, 4 is right.
+                RegisterCoordinates(firstCoordinate, orientation, ship.length);
+            }
+        }
+
         public override int GetCorrespondingOrientationNum(int[] firstCoordinate)//gets user input
         {
             Console.WriteLine("Please enter which direction to place your ship from the starting coordinate " + ConvertCoordinate(firstCoordinate) + ", that you entered: ");
@@ -88,6 +99,9 @@ namespace Battleship
             }
             return true;
         }
+
+         //----------------------------------Coordinate Conversion Methods------------------------------------//
+        //---------------------------------------------------------------------------------------------------//
 
         private int[] ConvertCoordinate(string input)
         {
