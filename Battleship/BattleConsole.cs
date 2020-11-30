@@ -21,19 +21,14 @@ namespace Battleship
 
         public int[,] GenerateEmptyBoard()
         {
-            int[,] board = new int[20, 20];
-            //Fill in the top row from index 1-21 with 1-21.
-            //Fill in the Left-most column with Ascii values of letters A-T from index 1-21
-            for (int i = 1; i < 21; i++){
-                board[0, i] = i + 48; 
-                board[i, 0] = i + 64;
-            }
+            int[,] board = new int[20, 20];//[row,column]
+ 
             //fill in all other 
-            for (int j = 1; j < 21; j++)
+            for (int i = 0; i < 20; i++)//row
             {
-                for (int k = 1; k < 21; k++)
+                for (int j = 0; j < 20; j++)//column.
                 {
-                    board[j, k] = 79;
+                    board[i, j] = 79;
                 }
             }
             return board;
