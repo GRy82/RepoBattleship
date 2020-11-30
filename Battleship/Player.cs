@@ -28,7 +28,7 @@ namespace Battleship
         }
 
 
-        private bool FirstCoordinateValidation(int rowNum, int columnNum, int length)
+        protected bool FirstCoordinateValidation(int rowNum, int columnNum, int length)
         {
             int validDirectionCount = 0;
             if (CheckUp(rowNum, columnNum, length)) {
@@ -49,7 +49,7 @@ namespace Battleship
             return false;
         }
 
-        private bool CheckUp(int rowNum, int columnNum, int length)
+        protected bool CheckUp(int rowNum, int columnNum, int length)
         {
             if (rowNum - (length - 1) < 0) { //Check for out of bounds proposition.
                 return false;
@@ -63,7 +63,7 @@ namespace Battleship
             return true;
         }
 
-        private bool CheckDown(int rowNum, int columnNum, int length)
+        protected bool CheckDown(int rowNum, int columnNum, int length)
         {
             if (rowNum + (length - 1) > 19) { //Check for out of bounds proposition.
                 return false;
@@ -78,7 +78,7 @@ namespace Battleship
         }
 
 
-        private bool CheckRight(int rowNum, int columnNum, int length)
+        protected bool CheckRight(int rowNum, int columnNum, int length)
         {
             if (columnNum + (length - 1) > 19) { //Check for out of bounds proposition.
                 return false;
@@ -92,7 +92,7 @@ namespace Battleship
             return true;
         }
 
-        private bool CheckLeft(int rowNum, int columnNum, int length)
+        protected bool CheckLeft(int rowNum, int columnNum, int length)
         {
             if (columnNum - (length - 1) < 0) { //Check for out of bounds proposition.
                 return false;

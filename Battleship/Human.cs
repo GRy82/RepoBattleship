@@ -20,18 +20,108 @@ namespace Battleship
 
         public override void SetBoard()
         {
-            GetFirstCoord();
-            GetFirstCoordinate();
+            foreach(Ship ship in battleConsole.ownedShips)
+            {
+                int[] firstCoordinate = GetFirstCoord(ship.name, ship.length);
+                int orientation = GetOrientation(firstCoordinate, ship.length); //1 is up, 2 is down, 3 is left, 4 is right.
+                RegisterCoordinates(firstCoordinate, orientation, ship.length);
+            }
         }
 
-        private int[] getFirstCoord()
+        private void RegisterCoordinates(int[] firstCoordinate, int orientation, int shipLength)
+        {
+            int incrementer = 1;
+            int counter;
+            int terminatingIndex;
+            if (orientation == 1 || orientation == 3) {
+                incrementer = -1;
+            }
+
+            if (orientation == 1 || orientation == 2) {
+                counter = firstCoordinate[1];
+                terminatingIndex = firstCoordinate[1] + shipLength * incrementer;
+                while (counter != terminatingIndex)
+                {
+                    battleConsole.ownedBoard[firstCoordinate[0], counter] = 1; //equals 1 means portion of a ship is present.
+                    counter += incrementer;
+                } 
+            }
+            else {
+                counter = firstCoordinate[0];
+                terminatingIndex = firstCoordinate[0] + shipLength * incrementer;
+                while (counter != terminatingIndex)
+                {
+                    battleConsole.ownedBoard[counter, firstCoordinate[1]] = 1; //equals 1 means portion of a ship is present.
+                    counter += incrementer;
+                }
+            }
+        }
+
+        public int GetOrientation(int[] firstCoordinate, int shipLength)
+        {
+            bool isValidOrientation = false;
+            int numericSelection;
+            do
+            {
+                numericSelection = GetOrientationInput(firstCoordinate);
+                switch (numericSelection)
+                {
+                    case 1:
+                        isValidOrientation = CheckUp(firstCoordinate[0], firstCoordinate[1], shipLength);
+                        break;
+                    case 2:
+                        isValidOrientation = CheckDown(firstCoordinate[0], firstCoordinate[1], shipLength);
+                        break;
+                    case 3:
+                        isValidOrientation = CheckLeft(firstCoordinate[0], firstCoordinate[1], shipLength);
+                        break;
+                    case 4:
+                        isValidOrientation = CheckRight(firstCoordinate[0], firstCoordinate[1], shipLength);
+                        break;
+                }
+            } while (!isValidOrientation);
+
+            return numericSelection;
+        }
+
+        
+
+        private int GetOrientationInput(int[] firstCoordinate)
+        {
+            Console.WriteLine("Please enter which direction to place your ship from the starting coordinate " + ConvertCoordinate(firstCoordinate) + ", that you entered: ");
+            List<string> orientationOptions = new List<string> { "Up", "Down", "Left", "Right" };
+            ConsoleOptionsInterface orientationMenu = new ConsoleOptionsInterface(orientationOptions, false, false);
+            int numericSelection = orientationMenu.Launch();
+            return numericSelection;
+        }
+
+        
+
+
+         //-------------------------Obtain Valid First Coordinate-------------------//
+        //-------------------------------------------------------------------------//
+        private int[] GetFirstCoord(string shipName, int shipLength)
+        {
+            int[] firstCoordinate = new int[2];
+            string input;
+            do
+            {
+                input = GetFirstCoordInput(shipName, shipLength); 
+                firstCoordinate = ConvertCoordinate(input); //this should be safe to call with all the validation checks it received prior.
+            } while (!FirstCoordinateValidation(firstCoordinate[0], firstCoordinate[1], shipLength));//ensure there is at least one valid orientation for the ship available.
+            return firstCoordinate;
+        }
+
+        private string GetFirstCoordInput(string shipName, int shipLength)
         {
             string input;
-            Console.Write("Please enter a coordinate(eg. A:1) where you will place one end of your " + ship.name + ", which is " + ship.length + " spaces long: ");
+            Console.Write("Please enter a coordinate(eg. A:1) where you will place one end of your " + shipName + ", which is " + shipLength + " spaces long: ");
             do
             {
                 input = Console.ReadLine();
-            } while (!ValidateCoordinateInput(input));
+            } while (!ValidateCoordinateInput(input)); //Guarantees letter:number with letter uppercase and number 1-20.
+
+            return input;
         }
 
         private bool ValidateCoordinateInput(string input)
@@ -67,6 +157,24 @@ namespace Battleship
                 return false;
             }
             return true;
+        }
+
+        private int[] ConvertCoordinate(string input)
+        {
+            string[] coordinatesStringArray = input.Split();
+            int[] numericCoordinates = new int[2];
+            numericCoordinates[0] = Convert.ToInt32(coordinatesStringArray[0]) - 65; //Make sure to test this, and that it doesn't need to be converted to char first.
+            numericCoordinates[1] = Convert.ToInt32(coordinatesStringArray[1]);
+            return numericCoordinates;
+        }
+
+        private string ConvertCoordinate(int[] input)
+        {
+            string stringVersion = "";
+            int rowCoordinate = input[0] + 65;
+            char rowChar = Convert.ToChar(rowCoordinate);
+            stringVersion += Convert.ToString(rowChar) + ":" + Convert.ToString(input[1]);
+            return stringVersion;
         }
 
 
