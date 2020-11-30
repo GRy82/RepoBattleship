@@ -26,7 +26,7 @@ namespace Battleship
             while(runGame == true)
             {
                 int optionSelected = startMenu.Launch();//If optionSelected == 4, program automatically terminated.
-                playersList = Setup.LoadObjects(optionSelected);
+                playersList = Setup.LoadBattleConsoles(optionSelected);
                 playerOne = playersList[0];
                 playerTwo = playersList[1];
                 playerOne.SetBoard();

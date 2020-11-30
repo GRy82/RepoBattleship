@@ -23,9 +23,6 @@ namespace Battleship
         public abstract void SelectTargetCoord();
 
         public abstract void SetBoard();
-
-        public abstract Coordinates GetStartingCoordinate();
-        public abstract int GetOrientation(Coordinates coords, Ship ship);
        
 
         public void AssignAnchorPointsToShip(int orientation, Coordinates startingCoordinates, Ship ship)

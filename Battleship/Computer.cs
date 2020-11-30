@@ -24,14 +24,14 @@ namespace Battleship
             Console.WriteLine(name + "'s ships have been placed on their board");
         }
 
-        public void SetShip(Ship ship)
+        void SetShip(Ship ship)
         {
             Coordinates startingCoords = GetStartingCoordinate();
             int orientation = GetOrientation(startingCoords, ship);
             AssignAnchorPointsToShip(orientation, startingCoords, ship);
         }
 
-        public override Coordinates GetStartingCoordinate()
+        Coordinates GetStartingCoordinate()
         {
             string stringCoord;
             do
@@ -44,7 +44,7 @@ namespace Battleship
         }
 
 
-        public override int GetOrientation(Coordinates coords, Ship ship)
+        int GetOrientation(Coordinates coords, Ship ship)
         {
             int randomDirection;
             do

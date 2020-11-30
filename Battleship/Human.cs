@@ -27,16 +27,16 @@ namespace Battleship
             }
         }
 
-        public void SetShip(Ship ship)
+       void SetShip(Ship ship)
         {
-            Console.WriteLine("Choose a space for one end of your " + ship.name + " of size " + ship.length + ". (eg. B:13)");
+            Console.WriteLine("\nChoose a space for one end of your " + ship.name + " of size " + ship.length + ". (eg. B:13)");
             Coordinates coords = GetStartingCoordinate();
-            Console.WriteLine("Choose an orientation");
+            Console.WriteLine("\nChoose an orientation");
             int orientationSelection = GetOrientation(coords, ship);
             AssignAnchorPointsToShip(orientationSelection, coords, ship);
         }
 
-        public override Coordinates GetStartingCoordinate()
+        Coordinates GetStartingCoordinate()
         {
             Coordinates coords;
             string userInput;
@@ -51,7 +51,7 @@ namespace Battleship
             return coords;
         }
 
-        public override int GetOrientation(Coordinates coords, Ship ship)
+        int GetOrientation(Coordinates coords, Ship ship)
         {
             List<string> orientationOptions = new List<string> { "Up", "Down", "Left", "Right" };
             ConsoleOptionsInterface orientationMenu = new ConsoleOptionsInterface(orientationOptions, false, false);

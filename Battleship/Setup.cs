@@ -8,7 +8,7 @@ namespace Battleship
 {
     static class Setup
     {
-        public static List<Player> LoadObjects(int optionSelected)
+        public static List<Player> LoadBattleConsoles(int optionSelected)
         {
             List<Ship> playerOneShips = new List<Ship> { new Ship("Destroyer", 2), new Ship("Submarine", 3), new Ship("Battleship", 4), new Ship("Aircraft Carrier", 5) };
 
@@ -16,8 +16,6 @@ namespace Battleship
 
             BattleConsole battleConsoleOne = new BattleConsole(playerOneShips);
             BattleConsole battleConsoleTwo = new BattleConsole(playerTwoShips);
-            battleConsoleOne.GenerateEmptyBoards();
-            battleConsoleTwo.GenerateEmptyBoards();
             List<BattleConsole> battleConsolesList = new List<BattleConsole> { battleConsoleOne, battleConsoleTwo };
 
             List<Player> playersList = LoadPlayers(optionSelected, battleConsolesList);
