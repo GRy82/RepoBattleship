@@ -15,54 +15,6 @@ namespace Battleship
             this.battleConsole = battleConsole;
         }
 
-        public override void SetBoard()
-        {
-            foreach (Ship ship in battleConsole.ownedShips)
-            {
-                SetShip(ship);
-            }
-            Console.WriteLine(name + "'s ships have been placed on their board");
-        }
-
-        void SetShip(Ship ship)
-        {
-            Coordinates startingCoords = GetStartingCoordinate();
-            int orientation = GetOrientation(startingCoords, ship);
-            AssignAnchorPointsToShip(orientation, startingCoords, ship);
-        }
-
-        Coordinates GetStartingCoordinate()
-        {
-            string stringCoord;
-            do
-            {
-                int numericRow = RandNumGen.GenerateRand(1, 21);
-                int numericColumn = RandNumGen.GenerateRand(1, 21);
-                stringCoord = Convert.ToChar(numericRow + 64) + ":" + numericColumn;
-            } while (!Coordinates.ValidCoord(stringCoord));
-            return Coordinates.ConvertCoord(stringCoord);
-        }
-
-
-        int GetOrientation(Coordinates coords, Ship ship)
-        {
-            int randomDirection;
-            do
-            {
-                randomDirection = RandNumGen.GenerateRand(1, 5);
-
-            } while (!CheckFit(coords, randomDirection, ship) || !CheckInterference(coords, randomDirection, ship));
-            return randomDirection;
-        }
-
-
-        public override void OptionsMenu()
-        {
-            
-        }
-        public override void SelectTargetCoord()
-        {
-
-        }
+      
     }
 }
