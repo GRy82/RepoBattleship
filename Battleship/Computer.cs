@@ -15,9 +15,24 @@ namespace Battleship
             this.battleConsole = battleConsole;
         }
 
-        public override void SetBoard()
+
+        public override int[] GetFirstCoord(string name, int shipLength)
         {
-            throw new NotImplementedException();
+            int rowIndex;
+            int columnIndex;
+            do
+            {
+                rowIndex = RandNumGen.GenerateRand(0, 20);
+                columnIndex = RandNumGen.GenerateRand(0, 20);
+            } while (!FirstCoordinateValidation(rowIndex, columnIndex, shipLength));
+
+            int[] firstCoordinates = new int[2] { rowIndex, columnIndex };
+        }
+
+        public override int GetCorrespondingOrientationNum(int[] firstCoordinate)
+        {
+            int randomOrientationNumber = RandNumGen.GenerateRand(1, 5);
+            return randomOrientationNumber;
         }
     }
 }
