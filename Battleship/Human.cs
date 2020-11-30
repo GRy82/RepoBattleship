@@ -8,9 +8,7 @@ using ProblemSolving1;
 namespace Battleship
 {
     class Human : Player
-    {
-        ConsoleOptionsInterface turnMenu;
-        
+    {   
         public Human(string name, BattleConsole battleConsole)
         {
             this.name = name;
@@ -22,12 +20,11 @@ namespace Battleship
         {
             foreach (Ship ship in battleConsole.ownedShips)
             {
-                DisplayBoard.DisplaySingleBoard(battleConsole.ownedBoard);
+                Display.DisplaySingleBoard(battleConsole.ownedBoard);
                 int[] firstCoordinate = GetFirstCoord(ship.name, ship.length);
                 int orientation = GetOrientation(firstCoordinate, ship.length); //1 is up, 2 is down, 3 is left, 4 is right.
                 RegisterCoordinates(firstCoordinate, orientation, ship.length);
             }
-            DisplayBoard.DisplaySingleBoard(battleConsole.ownedBoard);
         }
 
         public override int GetCorrespondingOrientationNum(int[] firstCoordinate)//gets user input
@@ -122,6 +119,30 @@ namespace Battleship
             return stringVersion;
         }
 
+        //------------------------------------Turn-based Fighting Methods------------------------------------//
+        //---------------------------------------------------------------------------------------------------//
 
+        public override int[] TakeTurn()
+        {
+            Display.DisplayDestroyedShips(destroyedShips, this.name);
+            Display.DisplaySingleBoard(battleConsole.ownedBoard);
+            Console.WriteLine("Press 'enter' when ready to attack: ");
+            string nothingToEnter = Console.ReadLine();
+            Display.DisplaySingleBoard(battleConsole.opponentBoard);
+            int[] attackCoordinates = GetAttackCoordinates();
+            return attackCoordinates;
+        }
+
+        private int[] GetAttackCoordinates()
+        {
+            string input;
+            Console.Write("Enter coordinates to fire a missile to(eg. A:1): ");
+            do
+            {
+                input = Console.ReadLine();
+            } while (!ValidateCoordinateInput(input));
+            int[] attackCoordinates = ConvertCoordinate(input);
+            return attackCoordinates;
+        }
     }
 }

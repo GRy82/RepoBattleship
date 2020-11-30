@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    public static class DisplayBoard
+    public static class Display
     {
         public static void DisplaySingleBoard(int[,] boardCoordinates)
         {
@@ -44,6 +44,9 @@ namespace Battleship
                     if (boardCoordinates[i,j] == 0) {
                         Console.Write("   ");
                     }
+                    else if (boardCoordinates[i, j] == 1) {
+                        Console.Write(" # ");
+                    }
                     else {
                         Console.Write(" X ");
                     }
@@ -68,6 +71,16 @@ namespace Battleship
                 stringVersion += ":" + Convert.ToString(column);
             }
             return stringVersion;
+        }
+
+        public static void DisplayDestroyedShips(List<string> destroyedShips, string playerName)
+        {
+            string printLine = "";
+            foreach (string shipName in destroyedShips)
+            {
+                printLine += shipName + "     ";
+            }
+            Console.WriteLine(playerName + $"'s Destroyed Ships({destroyedShips.Count}): " + printLine);
         }
 
     }

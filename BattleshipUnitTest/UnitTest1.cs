@@ -18,7 +18,7 @@ namespace BattleshipUnitTest
             BattleConsole battleConsoleOne = new BattleConsole(playerOneShips);
             Player playerOne = new Computer("Computer", battleConsoleOne);
             playerOne.SetBoard();
-            DisplayBoard.DisplaySingleBoard(playerOne.battleConsole.ownedBoard);
+            Display.DisplaySingleBoard(playerOne.battleConsole.ownedBoard);
             Console.ReadLine();
         }
 

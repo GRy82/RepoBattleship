@@ -31,28 +31,41 @@ namespace Battleship
                 playerTwo = playersList[1];
                 playerOne.SetBoard();
                 playerTwo.SetBoard();
-                TurnCycle();
+                TurnCycle(RandNumGen.GenerateRand(0,2));
             }
         }
 
-        public void TurnCycle()
+  
+        public void TurnCycle(int randomStart)
         {
-            string thisTurn = playerOne.name;
-            string lastTurn = playerTwo.name;
+            Player attacker = playerTwo;
+            Player victim = playerOne;
+            if (randomStart == 0) {
+                attacker = playerOne;
+                victim = playerTwo;
+            }
+
+            int[] attackCoordinates = new int[2];
             do
             {
-                if (lastTurn == playerOne.name) {
-                    thisTurn = playerTwo.name;
-                    //playerTwo.OptionsMenu();
-                    lastTurn = playerTwo.name;
-                }
-                else {
-                    thisTurn = playerOne.name;
-                    //playerOne.OptionsMenu();
-                    lastTurn = playerTwo.name;
-                }
+                attacker.TakeTurn(); 
+                AssessAttack(attackCoordinates, attacker, victim);
+                
             } while (playerOne.destroyedShips.Count < 4 && playerTwo.destroyedShips.Count < 4);
         }
         
+        private void AssessAttack(int[] attackCoords, Player attacker, Player victim)
+        {
+            if (victim.battleConsole.ownedBoard[attackCoords[0], attackCoords[1]] == 1)
+            {
+                Console.WriteLine("\n" + attacker.name + "'s attack was successful! " + victim.name + "'s ship has been hit!");
+                attacker.battleConsole.opponentBoard[attackCoords[0], attackCoords[1]] = 2;
+                victim.battleConsole.opponentBoard[attackCoords[0], attackCoords[1]] = 2;
+            }
+            else
+            {
+                Console.WriteLine("\n" + attacker.name + "'s missile plunges into the water. " + victim.name + " was unharmed this turn.");
+            }
+        }
     }
 }
