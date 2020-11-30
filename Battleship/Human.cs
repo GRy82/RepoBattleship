@@ -27,6 +27,7 @@ namespace Battleship
                 int orientation = GetOrientation(firstCoordinate, ship.length); //1 is up, 2 is down, 3 is left, 4 is right.
                 RegisterCoordinates(firstCoordinate, orientation, ship.length);
             }
+            DisplayBoard.DisplaySingleBoard(battleConsole.ownedBoard);
         }
 
         public override int GetCorrespondingOrientationNum(int[] firstCoordinate)//gets user input
@@ -48,7 +49,7 @@ namespace Battleship
             do
             {
                 input = GetFirstCoordInput(shipName, shipLength); 
-                firstCoordinate = ConvertCoordinate(input); //this should be safe to call with all the validation checks it received prior.
+                firstCoordinate = ConvertCoordinate(input); //Returned ints are converted to 0-19 matrix indeces.
             } while (!FirstCoordinateValidation(firstCoordinate[0], firstCoordinate[1], shipLength));//ensure there is at least one valid orientation for the ship available.
             return firstCoordinate;
         }
@@ -80,16 +81,16 @@ namespace Battleship
             }
             string[] splitStringArray = input.Split(':');
             if (splitStringArray[0].Length != 1 || (splitStringArray[1].Length < 1 && splitStringArray[1].Length > 2)) {
-                Console.Write("Re-enter your coordinate without spaces, with a letter, a colon, and a number(eg. A:1): ");
+                Console.Write("Re-enter your coordinate without spaces, with an uppercase letter, a colon, and a number(eg. A:1): ");
                 return false;
             }
             if ((int)splitStringArray[0][0] < 65 || (int)splitStringArray[0][0] > 90) {
-                Console.Write("Re-enter your coordinate without spaces, with a letter, a colon, and a number(eg. A:1): ");
+                Console.Write("Re-enter your coordinate without spaces, with an uppercase letter, a colon, and a number(eg. A:1): ");
                 return false;
             }
             foreach (char character in splitStringArray[1]) {
                 if ((int)character < 48 || (int)character > 57) {
-                    Console.Write("Re-enter your coordinate without spaces, with a letter, a colon, and a number(eg. A:1): ");
+                    Console.Write("Re-enter your coordinate without spaces, with an uppercase letter, a colon, and a number(eg. A:1): ");
                     return false;
                 }
             }
@@ -103,21 +104,21 @@ namespace Battleship
          //----------------------------------Coordinate Conversion Methods------------------------------------//
         //---------------------------------------------------------------------------------------------------//
 
-        private int[] ConvertCoordinate(string input)
+        private int[] ConvertCoordinate(string input)//convert user input letter:1-20 to 0-19:0-19, eg. A:1 = 0:0;
         {
-            string[] coordinatesStringArray = input.Split();
+            string[] coordinatesStringArray = input.Split(':');
             int[] numericCoordinates = new int[2];
-            numericCoordinates[0] = Convert.ToInt32(coordinatesStringArray[0]) - 65; //Make sure to test this, and that it doesn't need to be converted to char first.
-            numericCoordinates[1] = Convert.ToInt32(coordinatesStringArray[1]);
+            numericCoordinates[0] = Convert.ToInt32(Convert.ToChar(coordinatesStringArray[0][0])) - 65; 
+            numericCoordinates[1] = Convert.ToInt32(coordinatesStringArray[1]) - 1;
             return numericCoordinates;
         }
 
-        private string ConvertCoordinate(int[] input)
+        private string ConvertCoordinate(int[] input)//Convert indeces of matrix to user-friendly readable coordinates, eg. 2, 4 = C:5.
         {
             string stringVersion = "";
             int rowCoordinate = input[0] + 65;
             char rowChar = Convert.ToChar(rowCoordinate);
-            stringVersion += Convert.ToString(rowChar) + ":" + Convert.ToString(input[1]);
+            stringVersion += Convert.ToString(rowChar) + ":" + Convert.ToString(input[1] + 1);
             return stringVersion;
         }
 

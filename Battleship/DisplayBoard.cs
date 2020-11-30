@@ -16,7 +16,7 @@ namespace Battleship
 
         private static void WriteColumnHeader()
         {
-            Console.Write("  ");
+            Console.Write("\n  ");
             for (int i = 1; i <= 20; i++)
             {
                 Console.Write("  ");

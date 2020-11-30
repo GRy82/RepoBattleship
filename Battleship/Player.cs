@@ -16,7 +16,7 @@ namespace Battleship
 
         public Player()
         {
-
+            this.destroyedShips = new List<string> { };
         }
 
 
@@ -148,28 +148,28 @@ namespace Battleship
             int incrementer = 1;
             int counter;
             int terminatingIndex;
-            if (orientation == 1 || orientation == 3)
+            if (orientation == 1 || orientation == 3)//1 and 3 indicate decreasing indeces. Increment therefore set to -1.
             {
                 incrementer = -1;
             }
 
-            if (orientation == 1 || orientation == 2)
-            {
-                counter = firstCoordinate[1];
-                terminatingIndex = firstCoordinate[1] + shipLength * incrementer;
-                while (counter != terminatingIndex)
-                {
-                    battleConsole.ownedBoard[firstCoordinate[0], counter] = 1; //equals 1 means portion of a ship is present.
-                    counter += incrementer;
-                }
-            }
-            else
+            if (orientation == 1 || orientation == 2)//up or down: Row changes
             {
                 counter = firstCoordinate[0];
                 terminatingIndex = firstCoordinate[0] + shipLength * incrementer;
                 while (counter != terminatingIndex)
                 {
                     battleConsole.ownedBoard[counter, firstCoordinate[1]] = 1; //equals 1 means portion of a ship is present.
+                    counter += incrementer;
+                }
+            }
+            else//right/left: Column changes
+            {
+                counter = firstCoordinate[1];
+                terminatingIndex = firstCoordinate[1] + shipLength * incrementer;
+                while (counter != terminatingIndex)
+                {
+                    battleConsole.ownedBoard[firstCoordinate[0], counter] = 1; //equals 1 means portion of a ship is present.
                     counter += incrementer;
                 }
             }
