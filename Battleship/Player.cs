@@ -135,6 +135,9 @@ namespace Battleship
                         isValidOrientation = CheckRight(firstCoordinate[0], firstCoordinate[1], shipLength);
                         break;
                 }
+                if (isValidOrientation == false && this is Human) {
+                    Console.WriteLine("You cannot place the ship there.");
+                }
             } while (!isValidOrientation);
 
             return numericSelection;

@@ -32,7 +32,7 @@ namespace Battleship
 
         public override int GetCorrespondingOrientationNum(int[] firstCoordinate)//gets user input
         {
-            Console.WriteLine("Please enter which direction to place your ship from the starting coordinate " + ConvertCoordinate(firstCoordinate) + ", that you entered: ");
+            Console.WriteLine("\nPlease enter which direction to place your ship from the starting coordinate " + ConvertCoordinate(firstCoordinate) + ", that you entered: ");
             List<string> orientationOptions = new List<string> { "Up", "Down", "Left", "Right" };
             ConsoleOptionsInterface orientationMenu = new ConsoleOptionsInterface(orientationOptions, false, false);
             int numericSelection = orientationMenu.Launch();
