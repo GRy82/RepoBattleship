@@ -15,6 +15,9 @@ namespace Battleship
             this.battleConsole = battleConsole;
         }
 
-      
+        public override void SetBoard()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

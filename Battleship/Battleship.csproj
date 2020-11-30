@@ -46,7 +46,7 @@
     <Compile Include="BattleConsole.cs" />
     <Compile Include="Computer.cs" />
     <Compile Include="ConsoleOptionsInterface.cs" />
-    <Compile Include="Coordinates.cs" />
+    <Compile Include="DisplayBoard.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="Player.cs" />

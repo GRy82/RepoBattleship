@@ -18,7 +18,12 @@ namespace Battleship
          
         }
 
-      
+        public override void SetBoard()
+        {
+            GetFirstCoordinate();
+        }
+
+
 
     }
 }

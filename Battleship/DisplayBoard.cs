@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class DisplayBoard
+    public static class DisplayBoard
     {
+        public static void DisplaySingleBoard()
+        {
+
+        }
+
     }
 }
